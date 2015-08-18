@@ -1,0 +1,29 @@
+<h2>Welcome unknown user!</h2>
+<p>Please log in here: </p>
+
+<form action="/login" method="post">
+    <div id="nameerr" class="err" style="display: none">There is no such user...</div>
+    <div>
+        <label for="username">Username:</label>
+        <input id="username" type="text" name="username">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password">
+    </div>
+    <div>
+        <input class="btn" type="submit" value="Login">
+    </div>
+</form>
+<p>
+    <a href="/signup">Or create an account here</a><br />
+    <a href="#">Or you can use your GitHub account to log in</a>
+</p>
+
+<script>
+    $(document).ready(function() {
+        if (document.location.hash === '#nosuchuser') {
+            $("#nameerr").show();
+        }
+    });
+</script>

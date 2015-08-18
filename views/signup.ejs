@@ -1,0 +1,28 @@
+<h2>Welcome unknown user!</h2>
+<p>Please sign up here: </p>
+
+<form action="/signup" method="post">
+    <div id="nameerr" class="err" style="display: none">This user is already exist...</div>
+    <div>
+        <label for="username">Username:</label>
+        <input id="username" type="text" name="username">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password">
+    </div>
+    <div>
+        <input class="btn" type="submit" value="Sign In">
+    </div>
+</form>
+<p>
+    <a href="/login">Back to the login page</a><br />
+</p>
+
+<script>
+    $(document).ready(function() {
+        if (document.location.hash === '#userexist') {
+            $("#nameerr").show();
+        }
+    });
+</script>

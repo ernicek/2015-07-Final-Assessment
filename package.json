@@ -1,0 +1,30 @@
+{
+  "name": "final_assesment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ernicek/2015-07-Final-Assessment.git"
+  },
+  "author": "Ernest Toth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ernicek/2015-07-Final-Assessment/issues"
+  },
+  "homepage": "https://github.com/ernicek/2015-07-Final-Assessment#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.13.3",
+    "bookshelf": "~0.6.4",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.11.3",
+    "knex": "~0.5.7"
+  }
+}

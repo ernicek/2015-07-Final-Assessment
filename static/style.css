@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    font-family: arial, sans-serif;
+}
+
+.err {
+    padding: 10px 20px;
+    background-color: orangered;
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+form div {
+    padding: 10px;
+}
+
+form input {
+    font-size: 14px;
+}
+
+.btn {
+    padding: 10px 20px;
+}
