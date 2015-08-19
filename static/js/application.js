@@ -57,9 +57,9 @@ Application.prototype.startToSearch = function(sText) {
 };
 
 Application.prototype.showResults = function(data, pagination) {
+    this._$results.html("");
     if (data.length === 0) {
         this.switchToSearchMode("Search result doesn't contain any data...");
-        this._$results.html("");
         return;
     }
     if (pagination) {
