@@ -3,12 +3,17 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 
+var passport = require('passport');
+var GitHubStrategy = require('passport-github').Strategy;
+
 //require db connection to creating tables
 var db = require('./models/database');
 
 //our models
 var Users = require('./models/user').Users;
 var User = require('./models/user').User;
+
+var config = require('./config');
 
 var app = express();
 
@@ -25,18 +30,67 @@ app.use(session({
     resave: true
 }));
 
+//github think
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
+console.log("Using these GitHub keys: " + config.GITHUB_KEY + ", " + config.GITHUB_SECRET);
+
+passport.use(new GitHubStrategy({
+        clientID: config.GITHUB_KEY,
+        clientSecret: config.GITHUB_SECRET,
+        callbackURL: "http://localhost:3000/githubcallback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        new User({ githubid: profile['id']}).fetch().then(function(user) {
+            if (!user) {
+                new User({ username: profile['username'], password: "", githubid: profile['id'] }).save().then(function(newuser) {
+                    return done(null, profile);
+                });
+            } else {
+                return done(null, profile);
+            }
+        });
+    }
+));
+
+app.get('/github',
+    passport.authenticate('github'));
+
+app.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }),
+    function(req, res) {
+        res.redirect(302, '/');
+    });
 
 function checkAuth(req, res, next){
     //just simple check if user is already registered - should have filled its user_id in the session object
+    if (req.isAuthenticated()) {
+        return next();
+    }
     if(req.session.userId != null){
-        next();
+        return next();
     } else {
         res.redirect(302, '/login')
     }
 }
 
 app.get('/', checkAuth, function(req, res){
-    res.render('index', { 'userName': req.session.userName });
+    var userName = req.session.userName;
+    if (!userName) {
+        if (req.session['passport'] && req.session['passport']['user'] && req.session['passport']['user']['username']) {
+            userName = req.session['passport']['user']['username']
+        }
+    }
+    res.render('index', {'userName': userName});
 });
 
 app.get('/login', function(req, res){
@@ -94,7 +148,7 @@ app.post('/signup', function(req, res) {
     }
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(process.env.PORT || 3000, function () {
     var host = server.address().address;
     var port = server.address().port;
 

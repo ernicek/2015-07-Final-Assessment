@@ -25,6 +25,8 @@
     "express": "^4.13.3",
     "express-partials": "^0.3.0",
     "express-session": "^1.11.3",
-    "knex": "~0.5.7"
+    "knex": "~0.5.7",
+    "passport": "^0.2.2",
+    "passport-github": "^0.1.5"
   }
 }
