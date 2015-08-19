@@ -1,3 +1,37 @@
 <h2>Welcome <%- userName %></h2>
 
+<p>
+    <div>
+        <div class="label">What do you want to search for:</div>
+        <input id="search" type="text" name="search">
+        <div id="info">&nbsp;</div>
+        <div id="results"></div>
+    </div>
+</p>
+
 <a href="/logout">Logout</a>
+
+<script src="/js/application.js"></script>
+
+<script>
+    var App = null;
+
+    $(document).ready(function() {
+
+        //initialize our application
+        App = new Application();
+
+        var lastTimeoutId = null;
+        $("#search").keypress(function(e) {
+            if (App.searchInProgress()) {
+                e.preventDefault();
+                return false;
+            };
+
+            clearTimeout(lastTimeoutId);
+            lastTimeoutId = setTimeout(function() {
+                App.startToSearch($('#search').val());
+            }, 500);
+        });
+    });
+</script>

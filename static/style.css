@@ -1,5 +1,4 @@
 body {
-    margin: 0;
     font-family: arial, sans-serif;
 }
 
@@ -18,10 +17,32 @@ form div {
     padding: 10px;
 }
 
-form input {
+input {
     font-size: 14px;
 }
 
 .btn {
     padding: 10px 20px;
+}
+
+#info {
+    line-height: 40px;
+}
+
+#search {
+    margin-top: 10px;
+    width: 90%;
+}
+
+#results {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+    align-items: center;
+}
+
+#results .item {
+    width: 256px;
+    height: 256px;
+    margin: 10px;
 }

@@ -1,0 +1,17 @@
+{
+  "name": "static",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ernicek/2015-07-Final-Assessment",
+  "authors": [
+    "ernest <ernest.toth@autodesk.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
